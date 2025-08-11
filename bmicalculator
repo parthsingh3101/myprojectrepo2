@@ -1,0 +1,54 @@
+def calculate_bmi(weight_kg, height_m):
+    """
+    Calculates the Body Mass Index (BMI).
+
+    Args:
+        weight_kg (float): The individual's weight in kilograms.
+        height_m (float): The individual's height in meters.
+
+    Returns:
+        float: The calculated BMI.
+    """
+    if height_m <= 0:
+        return "Error: Height cannot be zero or negative."
+    bmi = weight_kg / (height_m ** 2)
+    return bmi
+
+def interpret_bmi(bmi):
+    """
+    Interprets the BMI value and returns a category.
+
+    Args:
+        bmi (float): The calculated BMI value.
+
+    Returns:
+        str: The BMI category (e.g., "Underweight", "Normal weight").
+    """
+    if bmi < 18.5:
+        return "Underweight"
+    elif 18.5 <= bmi < 25:
+        return "Normal weight"
+    elif 25 <= bmi < 30:
+        return "Overweight"
+    else:
+        return "Obesity"
+
+# Get user input
+try:
+    weight = float(input("Enter your weight in kilograms (kg): "))
+    height = float(input("Enter your height in meters (m): "))
+except ValueError:
+    print("Invalid input. Please enter numerical values for weight and height.")
+else:
+    # Calculate BMI
+    bmi_value = calculate_bmi(weight, height)
+
+    if isinstance(bmi_value, str):  # Check for error message from calculate_bmi
+        print(bmi_value)
+    else:
+        # Interpret BMI
+        bmi_category = interpret_bmi(bmi_value)
+
+        # Display results
+        print(f"\nYour BMI is: {bmi_value:.2f}")
+        print(f"You are categorized as: {bmi_category}")
